@@ -20,7 +20,7 @@ public class Car {
 	public void setCarID(int carID) {
 		this.carID = carID;
 	}
-	int park(ParkingLot pl1) {
+	int park(ParkingLot pl1) {                 //park method - Parameter: Parking Lot object, Returns SlotNo where the cark is parked
 		
 		if(pl1.getStatus()==1) {
 			return -1;
