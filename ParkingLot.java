@@ -9,7 +9,7 @@ public class ParkingLot {
 		status =0;
 		init();
 	}
-	public void init() {
+	public void init() {                                 //initializes all slots to empty status
 		for(int i=0;i<maxSize;i++) {
 			slots[i] = new ParkingSlot(0);
 		}
@@ -27,7 +27,7 @@ public class ParkingLot {
 		this.status = status;
 	}
 	
-	public void updateStatus() {
+	public void updateStatus() {        //update status to check if parking lot is full
 		int flag = 1;
 		for(int i=0;i<maxSize;i++) {
 			if(slots[i].getStatus()==0) {
@@ -37,9 +37,9 @@ public class ParkingLot {
 		status = flag;
 	}
 	
-	public Car unPark(int slotNo) {
+	public Car unPark(int slotNo) {                                             
 			Car unparkedCar = slots[slotNo].getAllotedCar();
-			if(slotNo>maxSize||unparkedCar==null) {
+			if(slotNo>maxSize||unparkedCar==null) {           //if SlotNo does not exist or no car is parked at that slot, return null
 				return null;
 			}
 			slots[slotNo].allotedCar.setAllotedSlot(null);
@@ -48,7 +48,7 @@ public class ParkingLot {
 			updateStatus();
 			return unparkedCar;
 		}
-	int getBySlot(int slotNo) {
+	int getBySlot(int slotNo) {                                          
 		return slots[slotNo].getAllotedCar().getCarID();
 	}
 	int getByCarID(int carID) {
