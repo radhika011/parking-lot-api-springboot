@@ -16,36 +16,44 @@ import org.springframework.stereotype.Component;
 
 public class PrincipalController {
 	@Autowired
-	ParkingLot pl1;
+	ParkingLot parkingLot;
 	@RequestMapping()
 	String sayHello() {
 		return "Hello World!";
 	}
-	@RequestMapping(value="/parking-lot/car/car-id/{car_id}/park")
-	String park(@PathVariable int car_id,HttpServletResponse response) throws IOException{
-		Car car1 = new Car(car_id);
-		int slotNo = car1.park(pl1);
+	@RequestMapping(value="/parkingLot/car/carId/{carId}/park")
+	String park(@PathVariable int carId,HttpServletResponse response) throws IOException{
+		Car car = new Car(carId);
+		int slotNo = car.park(parkingLot);
 		if(slotNo==-1) {
 			response.sendError(HttpStatus.BAD_REQUEST.value());
 		}
-		return  "Car "+car_id+" parked at "+slotNo;
+		StringBuilder message = new StringBuilder();
+		message.append("Car ").append(carId).append(" parked at ").append(slotNo);
+		return  message.toString();
 	}
-	@RequestMapping(value="/parking-lot/slot/slot-no/{slot_no}/unpark")
-	String unpark(@PathVariable int slot_no,HttpServletResponse response) throws IOException{
-		Car unparked = pl1.unPark(slot_no);
+	@RequestMapping(value="/parkingLot/slot/slotNo/{slotNo}/unpark")
+	String unpark(@PathVariable int slotNo,HttpServletResponse response) throws IOException{
+		Car unparked = parkingLot.unPark(slotNo);
 		if(unparked==null) {
 			response.sendError(HttpStatus.BAD_REQUEST.value());
 		}
-		return "Car with car ID "+unparked.getCarID()+" unparked from "+slot_no;
+		StringBuilder message = new StringBuilder();
+		message.append("Car with car ID ").append(unparked.getCarID()).append(" unparked from ").append(slotNo);
+		return message.toString();
 	}
-	@RequestMapping(value="/parking-lot/slot/slot-no/{slot_no}",method = RequestMethod.GET)
-	String showCarID(@PathVariable int slot_no) {
-		int carID = pl1.getBySlot(slot_no);
-		return "Car with ID: "+carID+" at slot number:"+slot_no;
+	@RequestMapping(value="/parkingLot/slot/slotNo/{slotNo}",method = RequestMethod.GET)
+	String showCarID(@PathVariable int slotNo) {
+		int carId = parkingLot.getBySlot(slotNo);
+		StringBuilder message = new StringBuilder();
+		message.append("Car with ID: ").append(carId).append(" at slot number: ").append(slotNo);
+		return message.toString();
 	}
-	@RequestMapping(value="/parking-lot/car/car-id/{car_id}",method = RequestMethod.GET)
-	String showSlotNo(@PathVariable int car_id) {
-		return "Car with ID: "+car_id+" at slot number:"+pl1.getByCarID(car_id);
+	@RequestMapping(value="/parkingLot/car/carId/{carId}",method = RequestMethod.GET)
+	String showSlotNo(@PathVariable int carId) {
+		StringBuilder message = new StringBuilder();
+		message.append("Car with ID: ").append(carId).append(" at slot number: ").append(parkingLot.getByCarID(carId));
+		return message.toString();
 	}
 }
 
