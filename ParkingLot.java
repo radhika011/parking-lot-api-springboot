@@ -1,5 +1,7 @@
 package com.example.demo;
 import java.util.*;
+import org.springframework.stereotype.*;
+@Service
 public class ParkingLot {
 	ParkingSlot slots[];//index serves as slot number
 	int status;
