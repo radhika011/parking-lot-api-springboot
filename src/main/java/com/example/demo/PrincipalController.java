@@ -56,4 +56,3 @@ public class PrincipalController {
 		return message.toString();
 	}
 }
-

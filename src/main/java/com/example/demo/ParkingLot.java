@@ -1,7 +1,10 @@
 package com.example.demo;
 import java.util.*;
+import lombok.Data;
 import org.springframework.stereotype.*;
+
 @Service
+@Data
 public class ParkingLot {
 	ParkingSlot slots[];//index serves as slot number
 	int status;
@@ -16,18 +19,7 @@ public class ParkingLot {
 			slots[i] = new ParkingSlot(0);
 		}
 	}
-	public ParkingSlot[] getSlots() {
-		return slots;
-	}
-	public void setSlots(ParkingSlot[] slots) {
-		this.slots = slots;
-	}
-	public int getStatus() {
-		return status;
-	}
-	public void setStatus(int status) {
-		this.status = status;
-	}
+	
 	
 	public void updateStatus() {        //update status to check if parking lot is full
 		int flag = 1;
